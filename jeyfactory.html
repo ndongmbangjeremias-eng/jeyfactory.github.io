@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jeyfactory — Marketing y redes sociales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#120F1A;
+    --panel:#1C1728;
+    --paper:#F2EEDD;
+    --lime:#D7FF3F;
+    --pink:#FF3D7F;
+    --muted:#948DAE;
+    --line: rgba(242,238,221,0.14);
+    font-size:16px;
+  }
+  :root[data-theme="light"]{
+    --bg:#F2EEDD; --panel:#E9E3CC; --paper:#120F1A; --muted:#5B5570;
+    --line: rgba(18,15,26,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{
+    margin:0; background:var(--bg); color:var(--paper);
+    font-family:'Inter',sans-serif; line-height:1.5;
+    padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1140px; margin:0 auto; padding:0 6vw;}
+  .display{font-family:'Anton',sans-serif; text-transform:uppercase; letter-spacing:0.005em;}
+
+  header{position:sticky; top:0; top:env(safe-area-inset-top,0px); z-index:20;
+    background:color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);}
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:1rem 0;}
+  .nav .mark{font-family:'Anton',sans-serif; font-size:1.15rem; letter-spacing:0.02em;}
+  .nav .mark span{color:var(--lime);}
+  .nav ul{display:flex; gap:1.8rem; list-style:none; margin:0; padding:0; font-size:0.9rem;}
+  .nav ul a{text-decoration:none; color:var(--muted);}
+  .nav a.cta{background:var(--lime); color:#120F1A; text-decoration:none; font-weight:700;
+    padding:0.6rem 1.2rem; border-radius:100px; font-size:0.88rem;}
+  @media (max-width:760px){ .nav ul{display:none;} }
+
+  /* hero wordmark */
+  .hero{padding:4.5rem 0 2.5rem;}
+  .wordmark{
+    font-size:clamp(3rem, 13vw, 8.5rem); line-height:0.86; margin:0; text-align:center;
+  }
+  .wordmark .l1{color:var(--paper); display:block;}
+  .wordmark .l2{-webkit-text-stroke:2px var(--lime); color:transparent; display:block; transform:skewX(-4deg);}
+  .tagline{text-align:center; max-width:34ch; margin:1.6rem auto 0; color:var(--muted); font-size:1.08rem;}
+  .hero-actions{display:flex; gap:1rem; justify-content:center; margin-top:2.1rem; flex-wrap:wrap;}
+  .btn-lime{background:var(--lime); color:#120F1A; text-decoration:none; font-weight:700;
+    padding:0.9rem 1.7rem; border-radius:100px; font-size:0.95rem;}
+  .btn-line{border:1px solid var(--line); text-decoration:none; color:var(--paper); font-weight:600;
+    padding:0.9rem 1.7rem; border-radius:100px; font-size:0.95rem;}
+
+  /* marquee */
+  .marquee{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--panel);
+    overflow:hidden; padding:0.9rem 0; margin-top:3.5rem;}
+  .marquee-track{display:flex; gap:2.5rem; width:max-content; animation:scroll 22s linear infinite;
+    font-family:'Anton',sans-serif; font-size:1.1rem; text-transform:uppercase; color:var(--muted);}
+  .marquee-track span{color:var(--pink);}
+  @keyframes scroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+  @media (prefers-reduced-motion:reduce){ .marquee-track{animation:none;} }
+
+  section{padding:4rem 0; border-top:1px solid var(--line);}
+  .section-head{display:flex; justify-content:space-between; gap:2rem; align-items:baseline; margin-bottom:2.2rem; flex-wrap:wrap;}
+  .section-head h2{font-family:'Anton',sans-serif; text-transform:uppercase; font-size:2rem; margin:0;}
+  .section-head p{color:var(--muted); max-width:32ch; margin:0;}
+
+  /* servicios: production line */
+  .service-row{display:grid; grid-template-columns:3.5rem 1fr; gap:1.3rem; padding:1.4rem 0; border-top:1px solid var(--line);}
+  .service-row:last-child{border-bottom:1px solid var(--line);}
+  .service-row .n{font-family:'Anton',sans-serif; font-size:1.7rem; color:var(--pink);}
+  .service-row h3{margin:0 0 0.35rem; font-size:1.2rem; font-weight:700;}
+  .service-row p{margin:0; color:var(--muted); font-size:0.95rem; max-width:52ch;}
+
+  /* grid tipo feed */
+  .feed{display:grid; grid-template-columns:repeat(4,1fr); gap:0.8rem;}
+  @media (max-width:700px){ .feed{grid-template-columns:repeat(2,1fr);} }
+  .tile{aspect-ratio:1; border:1px solid var(--line); border-radius:6px; display:flex; align-items:flex-end; padding:0.7rem;
+    font-size:0.75rem; font-weight:600;}
+  .tile:nth-child(1){background:linear-gradient(160deg,var(--pink),#7A1743);}
+  .tile:nth-child(2){background:var(--panel); color:var(--muted);}
+  .tile:nth-child(3){background:linear-gradient(160deg,var(--lime),#7A8F1E); color:#120F1A;}
+  .tile:nth-child(4){background:var(--panel); color:var(--muted);}
+  .tile:nth-child(5){background:var(--panel); color:var(--muted); grid-column:span 2;}
+  .tile:nth-child(6){background:linear-gradient(160deg,#5A2FD6,#1C1728);}
+
+  /* proceso */
+  .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem;}
+  @media (max-width:780px){ .steps{grid-template-columns:1fr 1fr;} }
+  @media (max-width:460px){ .steps{grid-template-columns:1fr;} }
+  .step{border-top:2px solid var(--lime); padding-top:0.9rem;}
+  .step .n{font-family:'Anton',sans-serif; font-size:1.6rem; color:var(--lime);}
+  .step h4{margin:0.4rem 0 0.3rem; font-size:1rem; font-weight:700;}
+  .step p{margin:0; color:var(--muted); font-size:0.9rem;}
+
+  .quote{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:2.2rem clamp(1.5rem,4vw,3rem);}
+  .quote p{font-family:'Anton',sans-serif; text-transform:none; font-size:1.5rem; line-height:1.35; margin:0; max-width:52ch;}
+  .quote footer{color:var(--muted); font-size:0.9rem; margin-top:1rem;}
+
+  .contact-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:3rem;}
+  @media (max-width:780px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-grid dl{display:grid; grid-template-columns:auto 1fr; gap:0.6rem 1.2rem; margin:1.5rem 0 0; font-size:0.95rem;}
+  .contact-grid dt{color:var(--muted);}
+  form{display:grid; gap:0.9rem;}
+  input, textarea{font-family:'Inter',sans-serif; font-size:0.95rem; padding:0.85rem 0.95rem;
+    border:1px solid var(--line); border-radius:6px; background:var(--panel); color:var(--paper);}
+  textarea{min-height:5rem; resize:vertical;}
+  button{justify-self:start; background:var(--lime); color:#120F1A; border:none; font-weight:700;
+    padding:0.9rem 1.7rem; border-radius:100px; font-size:0.95rem; cursor:pointer; font-family:'Inter',sans-serif;}
+
+  .mail-block{text-align:center; padding:1rem 0;}
+  .mail-block p{color:var(--muted); margin:0 0 1.1rem; font-size:1rem;}
+  .contact-pills{display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;}
+  .mail-block a{
+    display:inline-flex; align-items:center; gap:0.7rem;
+    background:var(--panel); border:2px solid var(--lime); color:var(--paper);
+    padding:1.1rem 1.8rem; border-radius:100px;
+    font-size:clamp(1rem, 2.6vw, 1.35rem); font-weight:700; text-decoration:none;
+    word-break:break-all;
+  }
+  .mail-block a:hover{background:var(--lime); color:#120F1A;}
+  .mail-block a svg{flex:none; color:var(--lime);}
+  .mail-block a:hover svg{color:#120F1A;}
+
+  footer.site{padding:2rem 0; border-top:1px solid var(--line); color:var(--muted); font-size:0.85rem;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="mark">JEY<span>FACTORY</span></div>
+    <ul>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#trabajo">Trabajo</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+    </ul>
+    <a class="cta" href="#contacto">Hablemos</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <h1 class="wordmark">
+      <span class="l1">JEY</span><span class="l2">FACTORY</span>
+    </h1>
+    <p class="tagline">Edición, contenido y gestión de redes sociales para marcas que quieren sonar más fuerte que su feed.</p>
+    <div class="hero-actions">
+      <a class="btn-lime" href="#contacto">Pedir propuesta</a>
+      <a class="btn-line" href="#trabajo">Ver trabajo</a>
+    </div>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Reels</span>·TikTok·<span>Edición</span>·Instagram·<span>Copywriting</span>·Ads·<span>Estrategia</span>·YouTube Shorts·
+      <span>Reels</span>·TikTok·<span>Edición</span>·Instagram·<span>Copywriting</span>·Ads·<span>Estrategia</span>·YouTube Shorts·
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section style="border-top:none; padding-top:1rem; text-align:center;">
+      <svg viewBox="0 0 640 380" width="100%" style="max-width:560px; height:auto;" role="img" aria-label="Ordenador mostrando publicaciones de redes sociales">
+        <rect x="70" y="30" width="500" height="290" rx="14" fill="#1C1728" stroke="#D7FF3F" stroke-width="3"/>
+        <rect x="90" y="50" width="460" height="250" rx="4" fill="#120F1A"/>
+        <rect x="40" y="322" width="560" height="18" rx="9" fill="#1C1728"/>
+        <rect x="280" y="322" width="80" height="18" rx="9" fill="#948DAE" opacity="0.4"/>
+
+        <rect x="112" y="70" width="130" height="130" rx="8" fill="#FF3D7F"/>
+        <rect x="252" y="70" width="130" height="62" rx="8" fill="#D7FF3F"/>
+        <rect x="392" y="70" width="130" height="130" rx="8" fill="#5A2FD6"/>
+        <rect x="252" y="140" width="130" height="60" rx="8" fill="#1C1728" stroke="#948DAE" stroke-width="1.5"/>
+        <rect x="112" y="210" width="410" height="60" rx="8" fill="#1C1728" stroke="#948DAE" stroke-width="1.5"/>
+
+        <circle cx="140" cy="95" r="9" fill="#F2EEDD"/>
+        <rect x="128" y="115" width="100" height="8" rx="4" fill="#F2EEDD" opacity="0.85"/>
+        <rect x="128" y="130" width="70" height="8" rx="4" fill="#F2EEDD" opacity="0.5"/>
+
+        <polygon points="440,110 415,130 440,150" fill="#F2EEDD"/>
+        <rect x="130" y="228" width="60" height="8" rx="4" fill="#948DAE"/>
+        <rect x="130" y="244" width="120" height="8" rx="4" fill="#948DAE" opacity="0.6"/>
+      </svg>
+      <p style="color:var(--muted); margin-top:1.2rem; font-size:0.95rem;">Tu contenido, editado y listo para cada red.</p>
+    </section>
+
+    <section id="servicios">
+      <div class="section-head">
+        <h2>Servicios</h2>
+        <p>Producción de contenido y gestión, de punta a punta.</p>
+      </div>
+      <div class="service-row">
+        <div class="n">01</div>
+        <div><h3>Edición de video</h3><p>Reels, shorts y clips optimizados para retención, con subtítulos, ritmo y ganchos pensados para cada plataforma.</p></div>
+      </div>
+      <div class="service-row">
+        <div class="n">02</div>
+        <div><h3>Gestión de redes</h3><p>Calendario, publicación y comunidad. Alguien responde tus DMs y comentarios como si fueras tú, todos los días.</p></div>
+      </div>
+      <div class="service-row">
+        <div class="n">03</div>
+        <div><h3>Contenido y copy</h3><p>Guiones, captions y creatividades pensadas para tu marca, no plantillas genéricas recicladas.</p></div>
+      </div>
+      <div class="service-row">
+        <div class="n">04</div>
+        <div><h3>Publicidad paga</h3><p>Campañas en Meta y TikTok Ads, desde la creatividad hasta el reporte de resultados.</p></div>
+      </div>
+    </section>
+
+    <section id="trabajo">
+      <div class="section-head">
+        <h2>Trabajo reciente</h2>
+        <p>Una muestra de piezas que hemos producido para clientes.</p>
+      </div>
+      <div class="feed">
+        <div class="tile">Campaña verano</div>
+        <div class="tile">Reel producto</div>
+        <div class="tile">Serie tips</div>
+        <div class="tile">Detrás de cámaras</div>
+        <div class="tile">Lanzamiento línea nueva</div>
+        <div class="tile">UGC</div>
+      </div>
+    </section>
+
+    <section id="proceso">
+      <div class="section-head">
+        <h2>Cómo trabajamos</h2>
+        <p>El mismo circuito para cada cliente, cada mes.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><h4>Estrategia</h4><p>Definimos objetivos, tono y calendario del mes.</p></div>
+        <div class="step"><div class="n">2</div><h4>Producción</h4><p>Grabamos o recibimos material y lo editamos.</p></div>
+        <div class="step"><div class="n">3</div><h4>Publicación</h4><p>Programamos y gestionamos la comunidad a diario.</p></div>
+        <div class="step"><div class="n">4</div><h4>Reporte</h4><p>Resultados y ajustes para el siguiente ciclo.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="quote">
+        <p>«Pasamos de publicar cuando nos acordábamos, a tener un feed que parece de otra marca. Las vistas se triplicaron en dos meses.»</p>
+        <footer>— Fundadora, marca de indumentaria</footer>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="section-head" style="margin-bottom:1.6rem;">
+        <h2>Hablemos</h2>
+        <p>Contanos de tu marca y te respondemos con una propuesta.</p>
+      </div>
+      <div class="mail-block">
+        <p>Escríbenos y te respondemos con una propuesta.</p>
+        <div class="contact-pills">
+          <a href="mailto:ndongmbangjeremias@gmail.com">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7 10-7"/></svg>
+            ndongmbangjeremias@gmail.com
+          </a>
+          <a href="https://instagram.com/jeyproyect_edicion" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            @jeyproyect_edicion
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site wrap">
+  <span>© 2026 Jeyfactory</span>
+  <span>Contenido que sí se ve.</span>
+</footer>
+
+</body>
+</html>
